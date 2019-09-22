@@ -1,0 +1,66 @@
+﻿@model ALFATEX4TRADE.Models.RequestForm
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+<div align="center">
+    @using (Html.BeginForm("Edit", "Primissions", FormMethod.Post))
+    {
+
+        <div class="form-inline ">
+            <div class="form-group" style="margin-right:25px">
+                @Html.TextBox("PrimNumber", null, new
+           {
+
+               type = "number",
+               min = "0",
+               step = "1",
+               autocomplete = "off",
+               @placeholder = " Request Number ",
+               @class = "form-control",
+           })
+
+            </div>
+            <div class="form-group" style="margin-right:25px">
+
+                @Html.TextBox("Date", null, new
+       {
+         
+           @placeholder = " Date ",
+           autocomplete = "off",
+           @class = "datepicker form-control",
+       })
+            </div>
+
+            <div class="form-group">
+
+                <input type="submit" value="Edit" class="form-control" id="Done" />
+            </div>
+        </div>
+
+    }
+</div>
+
+
+
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+@section scripts{
+
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+        $(function () {
+            $(".datepicker").datepicker({
+                dateFormat: "dd MM yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-10:+10"
+            });
+
+        });
+    </script>
+}

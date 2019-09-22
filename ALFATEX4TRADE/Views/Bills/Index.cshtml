@@ -1,0 +1,130 @@
+﻿@model IEnumerable<ALFATEX4TRADE.Models.Bill>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div align="center">
+    @using (Html.BeginForm("", "Primissions", FormMethod.Post))
+    {
+
+        <div class="form-inline ">
+            <div class="form-group" style="margin-right:25px">
+                @Html.TextBox("PrimNumber", null, new
+           {
+
+               type = "number",
+               min = "0",
+               step = "1",
+               autocomplete = "off",
+               @placeholder = " Request Number ",
+               @class = "form-control",
+               @id = "DayID"
+           })
+
+            </div>
+            <div class="form-group" style="margin-right:25px">
+
+                @Html.TextBox("Date", null, new
+       {
+           @Value = DateTime.Today.ToString("dd MMM yyyy"),
+           @placeholder = " Date ",
+           autocomplete = "off",
+           @class = "datepicker form-control",
+           @id = "DayDate"
+       })
+            </div>
+
+            <div class="form-group">
+
+                <input type="submit" value="Search" class="form-control" id="Done" />
+            </div>
+        </div>
+
+    }
+</div>
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BillNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClientID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CleintName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bag)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DailyID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Total)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BillNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClientID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CleintName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bag)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DailyID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Total)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

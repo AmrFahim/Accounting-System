@@ -1,0 +1,191 @@
+﻿@model ALFATEX4TRADE.Models.BillForm
+@{
+    ViewBag.Title = "NewBill";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>NewBill</h2>
+<div id="pp">
+
+</div>
+@using (Html.BeginForm("NewBill", "Primissions", FormMethod.Post))
+{
+    <div align="center">
+
+
+        <div class="form-inline ">
+            <div class="form-group" style="margin-right:25px">
+                @Html.LabelFor(model => model.ClientID, htmlAttributes: new { @class = "control-label " })
+                @Html.TextBoxFor(m => Model.ClientID, new
+           {
+               @id = "cleintID",
+               @class = "passcleint form-control",
+               autocomplete = "off",
+               @readonly = "readonly",
+               @placeholder = " Cleint ID "
+           })
+
+            </div>
+            <div class="form-group" style="margin-right:25px">
+
+                @Html.LabelFor(model => model.CleintName, htmlAttributes: new { @class = "control-label" })
+
+                @Html.TextBoxFor(m => Model.CleintName, new
+           {
+               @id = "cleintName",
+               autocomplete = "off",
+               @class = "form-control",
+               @readonly = "readonly",
+               @placeholder = " Cleint Name "
+           })
+
+
+            </div>
+
+
+
+        </div>
+        </div>
+        <table class=" table-bordered" align="center"
+               style="margin-top:50px; border:solid ; width:880px">
+            <tr style="border:solid; ">
+                <th style="text-align:center ;border-right:solid ; width:100px">
+                    <p>Prodouct ID </p>
+                </th>
+                <th style="text-align:center;border-right:solid ; width:100px">
+                    <p>Size </p>
+                </th>
+                <th style="text-align:center;border-right:solid ">
+                    <p>Product Name </p>
+                </th>
+                <th style="text-align:center;border-right:solid; width:100px">
+                    <p> bag </p>
+                </th>
+                <th style="text-align:center;border-right:solid; width:100px">
+                    <p>Outgoing </p>
+                </th>
+                <th style="text-align:center;border-right:solid; width:100px">
+                    <p>Price </p>
+                </th>
+                <th style="text-align:center; width:100px">
+                    Total
+                </th>
+
+            </tr>
+
+      @for (int i = 0; i < 30; i++)
+    {     
+                <tr>
+
+                    <td>
+                        @Html.TextBoxFor(m => Model.ProductID, new { @readonly="readonly" , @id = "pid"+i , autocomplete = "off", @class = "form-control" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => Model.Size, new { @readonly="readonly" , @class = "form-control", @id = "sz" +i })
+
+                    </td>
+
+                    <td>
+                        @Html.TextBoxFor(m => Model.ProductName, new { @readonly = "readonly", @class = "form-control", @id = "pn" +i })
+
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => Model.Bag, new { @class = "form-control", type = "number", min = "0", step = "1" })
+
+                    </td>
+
+                    <td>
+                        @Html.TextBoxFor(m => Model.Outgoing, new {@id="ot" +i , @readonly = "readonly", type = "number", min = "0", step = "1", autocomplete = "off", @class = "form-control" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => Model.Price, new { @class = " passprice form-control", @id = "price" +i, type = "number", min = "0", step = "1" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => Model.Total, new { @readonly = "readonly", @class = "form-control", @id = "total" +i  })
+
+                    </td>
+
+                </tr>
+  }     
+        </table>
+
+
+
+        <div align="center" style="margin-top:20px ">
+            <input type="submit" value="  Post "  class="btn btn-default" style="font-size: 20px" id="post" />
+        </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+
+
+
+        <script src="~/Scripts/jquery-1.12.4.js"></script>
+
+
+        <script>
+
+            $(document).ready(function () {
+
+               $(function () {
+                   $.get("test", {}, function (data) {
+                        var r;
+                        $.each(data, function (i, v) {
+
+                            r += "<div>" + v.ProductID + "</div>";
+                            r += "<div>" + v.ProductName + "</div>";
+
+
+                        });
+
+                        $("#pp").append(r);
+                    });
+                });
+
+
+                $(function () {
+                    $.get("Display", {}, function (data) {
+                        $.each(data, function (i, v) {
+                            $("#pid"+i ).val(v.ProductID);
+                            $("#pn"+i ).val(v.ProductName);
+                            $("#sz" + i).val(v.Size);
+                            $("#ot" + i).val(v.Outgoing);
+                            $("#price" + i).val(v.Price);
+                           var tot = parseFloat(v.Price) * parseFloat(v.Outgoing);
+                           $("#total" + i).val(tot);
+                            $("#cleintID").val(v.ClientID);
+                            $("#cleintName").val(v.CleintName);
+
+                        });
+
+
+                    });
+                });
+
+
+                $(window).keydown(function (event) {
+                    if (event.keyCode == 13) {
+                        event.preventDefault();
+                        return false;
+                    }
+                });
+
+
+
+                $(".passprice").on('change', function () {
+                    var id = $(this).val();
+                    var ID = $(this).closest(".passprice").attr("id");
+                    var last;
+                    if (ID.length == 6) last = ID[5];
+                    else last = ID[5] + ID[6];
+                    var out = $("#ot" + last).val();
+                    var tot = parseFloat(out) * parseFloat(id);
+                    $("#total" + last).val(tot);
+
+                });
+            });
+
+
+        </script>

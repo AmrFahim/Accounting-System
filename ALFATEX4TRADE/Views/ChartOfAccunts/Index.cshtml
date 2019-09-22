@@ -1,0 +1,126 @@
+﻿@model  IEnumerable<ALFATEX4TRADE.Models.ChartOfAccounts>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Trial Balance </h2>
+<div align="center">
+@using (Html.BeginForm("Index", "ChartOfAccunts", FormMethod.Post))
+{
+
+    <div class="form-inline">
+        <div class="form-group" style="margin-right:25px">
+            @Html.TextBox("OpeningDate", null, new
+           {
+               @placeholder = " Opening Date ",
+               autocomplete = "off",
+               @class = "datepicker form-control"
+
+           })
+
+        </div>
+        <div class="form-group" style="margin-right:25px">
+
+            @Html.TextBox("EndingDate", null, new
+       {
+
+           @placeholder = "Ending Date ",
+           autocomplete = "off",
+           @class = "datepicker form-control"
+
+       })
+        </div>
+
+        <div class="form-group">
+
+            <input type="submit" value=" OK " class="form-control" id="Done" />
+        </div>
+    </div>
+
+}
+</div>
+<div align="center">
+    <div style="margin-top:25px ; max-width:800px ; border:solid">
+
+        <table class="table table-bordered">
+            <tr style="border-bottom:solid">
+                <th style="text-align:center ; border-right:solid">
+                    @Html.DisplayNameFor(model => model.AccountID)
+                </th>
+
+                <th style="text-align:center; border-right:solid">
+                    @Html.DisplayNameFor(model => model.AccountName)
+                </th>
+
+                <th style="text-align:center; border-right:solid">
+                    @Html.DisplayNameFor(model => model.OpeningBalace)
+                </th>
+                <th style="text-align:center; border-right:solid">
+                    @Html.DisplayNameFor(model => model.TotDR)
+                </th>
+                <th style="text-align:center">
+                    @Html.DisplayNameFor(model => model.TotCR)
+                </th>
+
+
+                <th style="text-align:center; ">
+                    @Html.DisplayNameFor(model => model.EndingBalace)
+                </th>
+               
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.AccountID)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.AccountName)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.OpeningBalace)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.TotDR)
+                    </td>
+
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.TotCR)
+                    </td>
+
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.EndingBalace)
+                    </td>
+                  
+
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
+
+
+
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+@section scripts{
+
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+        $(function () {
+            $(".datepicker").datepicker({
+                dateFormat: "dd MM yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-10:+10"
+            });
+
+        });
+    </script>
+}
+

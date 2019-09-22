@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ALFATEX4TRADE.Models.Cleint>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Chart Of Accounts</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div align="center" style="margin-bottom:25px">
+
+    @using (Html.BeginForm("Index", "Cleints", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+    <div class="form-inline">
+        <div class="form-group">
+            @Html.TextBox("AccountID", null, new {  @class = "form-control", @placeholder = " Account Code ", @autocomplete = "off" })
+        </div>
+        <div class="form-group" style="margin-left:15px">
+            <input type="submit" value=" OK " class="btn btn-default" />
+        </div>
+    </div>
+
+    }
+    </div>
+
+<div align="center">
+    <div 
+         style="overflow-x: auto; max-width:600px;
+    white-space: nowrap; border:solid;">
+
+        <table class="table table-bordered">
+            <tr style="border-bottom:solid">
+                <th style="text-align:center ; border-right:solid">
+                    @Html.DisplayNameFor(model => model.AccountID)
+                </th>
+                <th style="text-align:center ; border-right:solid">
+                    @Html.DisplayNameFor(model => model.AccountName)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.AccountID)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.AccountName)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.ActionLink("Delete", "Delete", new { id = item.AccountID })
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+</div>

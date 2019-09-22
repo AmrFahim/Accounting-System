@@ -1,0 +1,153 @@
+﻿@model IEnumerable<ALFATEX4TRADE.Models.Employee>
+@{
+    ViewBag.Title = "print";
+    
+}
+
+        @foreach (var item in Model)
+        {
+            <div style="margin-bottom:50px ; margin-top:10px ; page-break-inside:avoid" >
+                <div align="center">
+                    <div style=" height:50px ; width:800px ">
+
+
+                        <table class="table-bordered" style="float:right; width:400px">
+                            <tr>
+                                <td style="text-align:center ; width:300px ; "> @Html.DisplayFor(m => item.EmpID)</td>
+                                <th style="text-align:center ; width:100px ; ">:  رقم الموظف </th>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center;width:300px  ">@Html.DisplayFor(m => item.EmpName)</td>
+                                <th style="text-align:center;width:100px "> : إسم الموظف   </th>
+                            </tr>
+                        </table>
+
+
+                        <table class="table-bordered" style="float:right ; width:400px">
+                            <tr>
+                                <td style="text-align:center;width:300px "> @Html.DisplayFor(m => item.Brithday)</td>
+                                <th style="text-align:center;width:100px "> : تحريرا في </th>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center;width:300px ">@Html.DisplayFor(m => item.Section)</td>
+                                <th style="text-align:center;width:100px ">: صالة </th>
+                            </tr>
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+
+                <div align="center">
+
+                    <table class="table-bordered" >
+                        <tr>
+                            <th style="width:400px ; text-align:center">
+                                استقطاعات
+                            </th>
+                            <th style="width:400px ; text-align:center">
+                                مستحقات
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table class="table-bordered">
+                                    <tr>
+                                        <td style="width:300px ; text-align:center ; text-align:center"> @Html.DisplayFor(m => item.InsuranceValue)</td>
+                                        <th style="width:100px ; text-align:center ; text-align:center">  تأمينات إجتماعية </th>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:300px ; text-align:center ; text-align:center"> @Html.DisplayFor(m => item.AbsenceValue)</td>
+                                        <th style="width:100px ; text-align:center ; text-align:center">  الغياب </th>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="width:300px ; text-align:center ; text-align:center"> @Html.DisplayFor(m => item.LateValue)</td>
+                                        <th style="width:100px ; text-align:center ; text-align:center"> التأخير</th>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="width:300px ; text-align:center ; text-align:center"> @Html.DisplayFor(m => item.PermissiomTimeValue)</td>
+                                        <th style="width:100px ; text-align:center ; text-align:center">  أذون </th>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:300px ; text-align:center ; text-align:center"> @Html.DisplayFor(m => item.Loan)</td>
+                                        <th style="width:100px ; text-align:center ; text-align:center">  سلف </th>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:300px ; text-align:center ; text-align:center"> @Html.DisplayFor(m => item.Cuthafiz)</td>
+                                        <th style="width:100px ; text-align:center ; text-align:center">خصم حوافز</th>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:300px ; text-align:center ; text-align:center"> @Html.DisplayFor(m => item.BuyValue)</td>
+                                        <th style="width:100px ; text-align:center ; text-align:center"> مشتريات </th>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="width:300px ; text-align:center ; text-align:center"> @Html.DisplayFor(m => item.penalty)</td>
+                                        <th style="width:100px ; text-align:center ; text-align:center"> جزاءات و أبر</th>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:300px ; text-align:center ; text-align:center"> @Html.DisplayFor(m => item.Totcut)</td>
+                                        <th style="width:100px ; text-align:center ; text-align:center"> إجمالي المستقطع</th>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <table class="table-bordered">
+                                    <tr>
+                                        <td style="width:300px ; text-align:center ; text-align:center"> @Html.DisplayFor(m => item.Base)</td>
+                                        <th style="width:100px ; text-align:center ; text-align:center">  أساسي </th>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:300px ; text-align:center ; text-align:center"> @Html.DisplayFor(m => item.OvertimeValue)</td>
+                                        <th style="width:100px ; text-align:center ; text-align:center">  إضافي </th>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="width:300px ; text-align:center ; text-align:center"> 100 </td>
+                                        <th style="width:100px ; text-align:center ; text-align:center"> حوافز </th>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="width:300px ; text-align:center ; text-align:center"> @Html.DisplayFor(m => item.Transportation)</td>
+                                        <th style="width:100px ; text-align:center ; text-align:center">  بدل مواصلات  </th>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:300px ; text-align:center; height:22px "></td>
+                                        <th style="width:100px ; text-align:center ; text-align:center">   </th>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:300px ; text-align:center ; text-align:center; height:22px"></td>
+                                        <th style="width:100px ; text-align:center ; text-align:center"></th>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:300px ; text-align:center ; text-align:center; height:22px"> </td>
+                                        <th style="width:100px ; text-align:center ; text-align:center">  </th>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="width:300px ; text-align:center ; text-align:center; height:22px"> </td>
+                                        <th style="width:100px ; text-align:center ; text-align:center"> </th>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:300px ; text-align:center ; text-align:center"> @Html.DisplayFor(m => item.TotAdd)</td>
+                                        <th style="width:100px ; text-align:center ; text-align:center"> إجمالي المستحق</th>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table-bordered" style="width:800px">
+                        <tr>
+                            <td style="width:600px ; text-align:center ; text-align:center">  @Html.DisplayFor(m => item.PureSalary) </td>
+                            <th style="width:200px ; text-align:center ;"> الصافي</th>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+        }
+

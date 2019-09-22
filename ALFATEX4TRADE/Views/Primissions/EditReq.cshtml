@@ -1,0 +1,174 @@
+﻿@model ALFATEX4TRADE.Models.RequestForm
+
+@{
+    ViewBag.Title = "EditReq";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Stock Request </h2>
+
+
+<hr />
+
+
+@using (Html.BeginForm("EditReq", "Primissions", FormMethod.Post))
+{
+
+    <div align="center">
+
+        <div class="form-inline ">
+            <div class="form-group" style="margin-right:25px;width:150px">
+            @Html.LabelFor(model => model.ClientID, htmlAttributes: new { @class = "control-label" })
+                @Html.TextBoxFor(m => Model.ClientID, new
+           {
+               @id = "CID",
+               @class = "passcleint form-control",
+               autocomplete = "off",
+               @placeholder = " Cleint Code " ,
+           })
+
+            </div>
+            <div class="form-group" style="margin-right:25px">
+                @Html.LabelFor(model => model.CleintName, htmlAttributes: new { @class = "control-label" })
+                @Html.TextBoxFor(m => Model.CleintName, new
+           {
+               @id = "printcleint",
+               autocomplete = "off",
+               @class = "form-control",
+               @placeholder = " Cleint Name "
+           })
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <table class=" table-bordered" align="center"
+           style="margin-top:50px; border:solid ; ">
+        <tr style="border:solid; ">
+            <th style="text-align:center;border-right:solid">
+                <p>Product Code </p>
+            </th>
+            <th style="text-align:center;border-right:solid">
+                <p>Product Description </p>
+            </th>
+            <th style="text-align:center;">
+                <p>Outgoing</p>
+            </th>
+
+        </tr>
+
+        @for (int i = 0; i < 30; i++)
+        {
+            <tr>
+
+                <td>
+                    @Html.TextBoxFor(m => Model.ProductID, new { @id = "PID" + i, autocomplete = "off", @class = "passP form-control" })
+                </td>
+
+                <td>
+                    @Html.TextBoxFor(m => Model.ProductName, new { @class = "form-control", @id = "printproduct" + i, autocomplete = "off" })
+
+                </td>
+
+                <td>
+                    @Html.TextBoxFor(m => Model.Outgoing, new { @id = "out" + i, type = "number", min = "0", step = "1", autocomplete = "off", @class = "form-control" })
+                </td>
+
+            </tr>
+        }
+    </table>
+
+
+
+    <div align="center" style="margin-top:20px ">
+        <input type="submit" value="  Post  " class="btn btn-default" style="font-size: 20px" />
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script src="~/Scripts/jquery-1.12.4.js"></script>
+
+
+<script>
+
+    $(document).ready(function () {
+
+        $(window).keydown(function (event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                return false;
+            }
+        });
+
+
+        $(function () {
+            $.get("DisplayEdit", {}, function (data) {
+                $.each(data, function (i, v) {
+                    $("#PID" + i).val(v.ProductID);
+                    $("#printproduct" + i).val(v.ProductName);
+                    $("#out" + i).val(v.Outgoing);
+  
+                    $("#CID").val(v.ClientID);
+                    $("#printcleint").val(v.CleintName);
+
+                });
+
+
+            });
+        });
+
+
+
+
+        $("#CID").on('change', function () {
+            var id = $("#CID").val();
+            var Name;
+            $(function () {
+                $.get("Edit", {}, function (data) {
+                    $.each(data, function (i, v) {
+                        $("#PID" + i).val(v.ProductID);
+                        $("#printproduct" + i).val(v.ProductName);
+                        $("#CID").val(v.ClientID);
+                        $("#printcleint").val(v.CleintName);
+
+                    });
+
+
+                });
+            });
+
+        });
+
+
+
+
+        $(".passP").on('change', function () {
+            var id = $(this).val();
+            var ID = $(this).closest(".passP").attr("id");
+            var Name;
+            $(function () {
+                $.get("GetProduct", {}, function (data) {
+                    $.each(data, function (index, value) {
+                        if (value.ProductID == id) {
+                            Name = value.ProductName;
+                        }
+                    });
+                    var last;
+                    if (ID.length == 4) last = ID[3];
+                    else last = ID[3] + ID[4];
+                    $("#printproduct" + last).val(Name);
+
+                });
+            });
+
+        });
+
+    });
+</script>

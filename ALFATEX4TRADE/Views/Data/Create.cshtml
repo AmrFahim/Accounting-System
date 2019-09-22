@@ -1,0 +1,131 @@
+﻿@model ALFATEX4TRADE.Models.DailyTradeForm
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2> New Journal Entry </h2>
+
+@using (Html.BeginForm("Create", "Data", FormMethod.Post))
+{
+
+
+    <table class=" table-bordered" align="center"
+           style="margin-top:50px; border:solid ; ">
+        <tr style="border:solid; ">
+            <th style="text-align:center ;border-right:solid">
+                <p>Code</p>
+            </th>
+            <th style="text-align:center;border-right:solid">
+                <p> Account </p>
+            </th>
+            <th style="text-align:center;border-right:solid">
+                <p>DR</p>
+            </th>
+            <th style="text-align:center;border-right:solid">
+                <p>CR </p>
+            </th>
+
+            <th style="text-align:center;">
+                <p>Description </p>
+            </th>
+        </tr>
+
+        @for (int i = 0; i < 30; i++)
+        {
+            <tr>
+                <td >
+                    @Html.TextBoxFor(m => Model.AccountID[i], new { @id = "ID" + i, @class = "pass form-control", autocomplete = "off" })
+                </td>
+
+                <td>
+                    @Html.TextBoxFor(m => Model.AccountName[i], new { @id = "print" + i, autocomplete = "off", @class = "form-control" })
+                </td>
+
+                <td>
+                    @Html.TextBoxFor(m => Model.DR[i], new { @id ="dr"+i , type = "number", min = "0", step = "1", autocomplete = "off", @class = "form-control" })
+                </td>
+
+                <td>
+                    @Html.TextBoxFor(m => Model.CR[i], new { @id = "cr" + i , type = "number", min = "0", step = "1", autocomplete = "off", @class = "form-control" })
+
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => Model.Description[i], new {  autocomplete = "off", @class = "form-control" })
+                </td>
+            </tr>
+        }
+    </table>
+
+
+
+    <div align="center" style="margin-top:20px ">
+        <input type="submit" value="  Post  " class="btn btn-default" style="font-size: 20px" id="post" />
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script src="~/Scripts/jquery-1.12.4.js"></script>
+<script>
+
+    $(document).ready(function () {
+
+        $("#post").on("click", function () {
+            var dr = parseFloat(0);
+            var cr = parseFloat(0);
+          //  alert(dr);
+            for (var i = 0 ; i < 20 ; i++) {
+
+              if ( ($("#dr" + i).val()).length > 0 ){
+                dr += parseFloat($("#dr" + i).val())  ;
+                }
+              if (($("#cr" + i).val()).length > 0) {
+                    cr += parseFloat($("#cr" + i).val());
+                } 
+                }
+            if (dr != cr) {
+                var newLine = "\r\n"
+                var msg = "Total DR = " + dr + newLine + "Total CR = " + cr +
+                    newLine + " Total DR & Total CR are NOT equal ";
+                alert(msg);
+            }
+        });
+
+
+
+
+
+        $(window).keydown(function (event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        $(".pass").on('change', function () {
+            var id = $(this).val();
+            var ID = $(this).closest(".pass").attr("id");
+            var Name;
+           $(function () {
+                $.get("GetName", {}, function (data) {
+                    $.each(data, function (index, value) {
+                        if ( value.AccountID == id) {
+                            Name = value.AccountName ;
+                        }
+                    });
+                    var last;
+                    if (ID.length == 3) last = ID[2];
+                    else last = ID[2] + ID[3];
+                    $("#print" + last).val(Name);
+
+                });
+            });
+
+        });
+        //   }
+    
+    });
+</script>

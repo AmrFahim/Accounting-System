@@ -1,0 +1,164 @@
+﻿@model IEnumerable<ALFATEX4TRADE.Models.Primission>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Stock Request</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+<p style="float:right">
+    @Html.ActionLink("Edit Request ", "Edit")
+</p>
+
+<div align="center">
+    @using (Html.BeginForm("Index", "Primissions", FormMethod.Post))
+    {
+
+        <div class="form-inline ">
+            <div class="form-group" style="margin-right:25px">
+                @Html.TextBox("PrimNumber", null, new
+           {
+
+               type = "number",
+               min = "0",
+               step = "1",
+               autocomplete = "off",
+               @placeholder = " Request Number ",
+               @class = "form-control",
+               @id = "DayID"
+           })
+
+            </div>
+            <div class="form-group" style="margin-right:25px">
+
+                @Html.TextBox("Date", null, new
+       {
+           @Value = DateTime.Today.ToString("dd MMM yyyy"),
+           @placeholder = " Date ",
+           autocomplete = "off",
+           @class = "datepicker form-control",
+           @id = "DayDate"
+       })
+            </div>
+
+            <div class="form-group">
+
+                <input type="submit" value="OK" class="form-control" id="Done" />
+            </div>
+        </div>
+
+    }
+</div>
+
+<div id="MyId" align="center">
+    <div style="margin-top:25px ; max-width:800px ; border:solid">
+
+        <div style="border-bottom:solid ; height:70px ; ">
+            <div>
+                <span style="margin-right:5px; font-weight:bold ;font-size:20px; margin-left:8px "> Request Number : </span>
+                @foreach (var item in Model)
+                {
+                    <span style="font-size:18px; margin-right:20px">
+                        @Html.DisplayFor(modelItem => item.PrimNumber)
+                    </span>
+                    break;
+                }
+            </div>
+            <span style="margin-right:5px ; font-weight:bold ;font-size:20px "> @Html.DisplayNameFor(model => model.Date) :</span>
+
+            @foreach (var item in Model)
+            {
+                <span style="font-size:18px ">
+                    @Html.DisplayFor(modelItem => item.Date)
+                </span>
+                break;
+            }
+
+
+
+        </div>
+
+        <table class="table table-bordered">
+            <tr style="border-bottom:solid">
+                <th style="text-align:center ; border-right:solid">
+                    @Html.DisplayNameFor(model => model.ClientID)
+                </th>
+
+                <th style="text-align:center ; border-right:solid">
+                    @Html.DisplayNameFor(model => model.CleintName)
+                </th>
+
+                <th style="text-align:center ; border-right:solid">
+                    @Html.DisplayNameFor(model => model.ProductID)
+                </th>
+                <th style="text-align:center ; border-right:solid">
+                    @Html.DisplayNameFor(model => model.ProductName)
+                </th>
+                <th style="text-align:center">
+                    @Html.DisplayNameFor(model => model.Outgoing)
+                </th>
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.ClientID)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.CleintName)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.ProductID)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.Outgoing)
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+</div>
+<div align="center" style="margin-top:20px">
+    <button onclick="print('MyId')" class="btn btn-default">  Print </button>
+</div>
+
+<script>
+    function print(el) {
+        var res = document.body.innerHTML;
+        var p = document.getElementById(el).innerHTML;
+        document.body.innerHTML = p;
+        window.print();
+        document.body.innerHTML = res;
+    }
+</script>
+
+
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+@section scripts{
+
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+        $(function () {
+            $(".datepicker").datepicker({
+                dateFormat: "dd MM yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-10:+10"
+            });
+
+        });
+    </script>
+}

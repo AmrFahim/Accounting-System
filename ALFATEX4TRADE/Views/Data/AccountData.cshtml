@@ -1,0 +1,141 @@
+﻿@model IEnumerable<ALFATEX4TRADE.Models.Data>
+
+@{
+    ViewBag.Title = "AccountData";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Account Statement</h2>
+
+<div align="center" style="margin-bottom:25px">
+
+    @using (Html.BeginForm("AccountData", "Data", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-inline">
+            <div class="form-group" style="margin-right:25px">
+                @Html.TextBox("AccountID", null,
+                new { @class = "form-control", @placeholder = " Account Code ", @autocomplete = "off" })
+            </div>
+
+            <div class="form-group" style="margin-right:25px">
+                @Html.TextBox("OpeningDate", null, new
+           {
+               @placeholder = " Opening Date ",
+               autocomplete = "off",
+               @class = "datepicker form-control"
+
+           })
+
+            </div>
+            <div class="form-group" style="margin-right:10px">
+
+                @Html.TextBox("EndingDate", null, new
+       {
+
+           @placeholder = "Ending Date ",
+           autocomplete = "off",
+           @class = "datepicker form-control"
+
+       })
+            </div>
+
+
+
+            <div class="form-group" style="margin-left:15px">
+                <input type="submit" value=" OK " class="btn btn-default" />
+            </div>
+        </div>
+
+    }
+</div>
+<div align="center">
+
+    <div style="margin-top:25px ; max-width:800px ; border:solid">
+
+
+        <div style="border-bottom:solid ; height:60px ; ">
+            <div>
+                <span style="margin-right:5px; font-weight:bold ;font-size:20px; margin-left:8px "> Account Name : </span>
+                @foreach (var item in Model)
+                {
+                    <span style="font-size:18px; margin-right:20px">
+                        @Html.DisplayFor(modelItem => item.AccountName)
+                    </span>
+                    break;
+                }
+            </div>
+        </div>
+
+
+
+
+        <table class="table table-bordered">
+            <tr style="border-bottom:solid">
+                <th style="text-align:center ; border-right:solid ;width:200px">
+                    @Html.DisplayNameFor(model => model.DailyNum)
+                </th>
+
+                <th style="text-align:center; border-right:solid">
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+
+                <th style="text-align:center; border-right:solid">
+                    @Html.DisplayNameFor(model => model.DR)
+                </th>
+
+                <th style="text-align:center;border-right:solid">
+                    @Html.DisplayNameFor(model => model.CR)
+                </th>
+
+                <th style="text-align:center;">
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.DailyNum)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.DR)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.CR)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
+
+
+
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+@section scripts{
+
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+        $(function () {
+            $(".datepicker").datepicker({
+                dateFormat: "dd MM yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-10:+10"
+            });
+
+        });
+    </script>
+}
+

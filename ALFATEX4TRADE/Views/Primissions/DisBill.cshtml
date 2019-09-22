@@ -1,0 +1,294 @@
+﻿@model IEnumerable<ALFATEX4TRADE.Models.Bill>
+@{
+    ViewBag.Title = "DisBill";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var i = 1;
+
+    double GeneralTotal = 0;
+    double GBags = 0;
+
+    double Goutgoing = 0;
+    foreach (var j in Model)
+    {
+        GBags += Convert.ToDouble(j.Bag);
+        Goutgoing += Convert.ToDouble(j.Outgoing);
+        GeneralTotal += Convert.ToDouble(j.Total);
+
+    }
+}
+
+<h2>Display Bill</h2>
+
+
+<div align="center" >
+    @using (Html.BeginForm("DisBill", "Primissions", FormMethod.Post))
+    {
+
+        <div class="form-inline ">
+            <div class="form-group" style="margin-right:25px">
+                @Html.TextBox("BillNumber", null, new
+           {
+
+               type = "number",
+               min = "0",
+               step = "1",
+               autocomplete = "off",
+               @placeholder = " Bill Number ",
+               @class = "form-control",
+               @id = "DayID"
+           })
+
+            </div>
+            <div class="form-group" style="margin-right:25px">
+
+                @Html.TextBox("Date", null, new
+       {
+           @placeholder = " Date ",
+           autocomplete = "off",
+           @class = "datepicker form-control",
+           @id = "DayDate"
+       })
+            </div>
+
+            <div class="form-group">
+
+                <input type="submit" value=" OK " class="form-control" id="Done" />
+            </div>
+        </div>
+
+    }
+</div>
+<div id="MyId" align="center">
+    <div style="margin-top:25px ; width:830px">
+        <div style=" height:250px ; border:solid ">
+            <img src="~/Content/themes/base/images/PIC1.PNG" height="150" width="400"
+                 style="float:left; margin-left:4px ; margin-top:4px " />
+         
+            <div style="text-align:center ; margin-top: 10px ; font-weight:bold ; font-size:20px ">
+                <p>ALFATEX</p>
+            </div>
+            <div style="float:right">
+                <p>بيــــان أسعـــــار</p>
+                <table>
+                    <tr>
+                        <td style="text-align:center ; width:150px">
+                            @foreach (var item in Model)
+                            {
+                                @Html.DisplayFor(modelItem => item.CleintName)
+                                break;
+                            }
+
+                        </td>
+                        <th style="text-align:center ; width:150px">  مطلــوب من السيد </th>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center ; width:150px">
+
+                            @foreach (var item in Model)
+                            {
+                                @Html.DisplayFor(modelItem => item.ClientID)
+                                break;
+                            }
+
+                        </td>
+                        <th style="text-align:center ; width:150px">كـــود العميل </th>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center ; width:150px">
+                            @foreach (var item in Model)
+                            {
+                                @Html.DisplayFor(modelItem => item.Date)
+                                break;
+                            }
+                        </td>
+                        <th style="text-align:center ; width:150px">
+                            تحريرا في
+
+                        </th>
+                    </tr>
+
+
+                    <tr>
+                        <td style="text-align:center ; width:150px">
+                            @foreach (var item in Model)
+                            {
+                                @Html.DisplayFor(modelItem => item.BillNumber)
+                                break;
+                            }
+                        </td>
+                        <th style="text-align:center ; width:150px">
+                            رقــم الفاتوره
+
+                        </th>
+                    </tr>
+
+
+                    <tr>
+                        <td style="text-align:center ; width:150px">
+                            @foreach (var item in Model)
+                            {
+                                @Html.DisplayFor(modelItem => item.DailyID)
+                                break;
+                            }
+                        </td>
+                        <th style="text-align:center ; width:150px">
+                            رقــم القــيد
+
+                        </th>
+                    </tr>
+                </table>
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+
+
+        <table class=" table-bordered" align="center"
+               style="margin-top:5px; border:solid ">
+            <tr style="border:solid; ">
+                <th style="text-align:center ;border-right:solid ; width:30px">
+                    <p> S </p>
+                </th>
+                <th style="text-align:center ;border-right:solid ; width:100px">
+                    <p> Code </p>
+                </th>
+                <th style="text-align:center;border-right:solid ; width:100px">
+                    <p> Size </p>
+                </th>
+                <th style="text-align:center;border-right:solid ; width:300px ">
+                    <p> Description </p>
+                </th>
+                <th style="text-align:center;border-right:solid; width:100px">
+                    <p> Quantaty (بالكيس )</p>
+                </th>
+                <th style="text-align:center;border-right:solid; width:100px">
+                    <p> Quantaty (بالدسته ) </p>
+                </th>
+                <th style="text-align:center;border-right:solid; width:100px">
+                    <p>Price (بالجنيه)</p>
+                </th>
+                <th style="text-align:center; width:100px">
+                    <p>Total(بالجنيه)</p>
+                </th>
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+
+
+                <tr>
+                    <td style="text-align:center">
+                        @i
+                        @{
+                i++;
+                        }
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.ProductID)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.Size)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.Bag)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.Outgoing)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td style="text-align:center">
+                        @Html.DisplayFor(modelItem => item.Total)
+                    </td>
+                </tr>
+            }
+            @for (int q = Model.Count() ; q < 22 ; q++)
+            {
+                <tr>
+                    <td style="height:22px ; width:30px"></td>
+                    <td style="height:22px; width:100px"></td>
+                    <td style="height:22px ; width:100px"></td>
+                    <td style="height:22px ; width:300px"></td>
+                    <td style="height:22px ; width:100px"></td>
+                    <td style="height:22px ; width:100px"></td>
+                    <td style="height:22px ; width:100px"></td>
+                    <td style="height:22px ; width:100px"></td>
+                </tr>
+            }
+            <tr style="border-top:solid">
+                <th style="text-align:center ;border-right:hidden ; width:30px">
+                </th>
+                <th style="text-align:center ;border-right:hidden ; width:100px">
+                </th>
+                <th style="text-align:center;border-right:hidden ; width:100px">
+                </th>
+                <th style="text-align:center;border-right:solid ; width:300px ">
+                </th>
+                <th style="text-align:center;border-right:solid; width:100px">
+                    <p> @GBags</p>
+                </th>
+                <th style="text-align:center;border-right:solid; width:100px">
+                    <p> @Goutgoing </p>
+                </th>
+                <th style="text-align:center;border-right:solid; width:100px">
+                </th>
+                <th style="text-align:center; width:100px">
+                    <p>@GeneralTotal</p>
+                </th>
+
+            </tr>
+
+
+        </table>
+
+
+    </div>
+</div>
+
+<div align="center" style="margin-top:20px">
+    <button onclick="print('MyId')" class="btn btn-default">  Print </button>
+</div>
+
+<script>
+    function print(el) {
+        var res = document.body.innerHTML;
+        var p = document.getElementById(el).innerHTML;
+        document.body.innerHTML = p;
+        window.print();
+        document.body.innerHTML = res;
+    }
+</script>
+
+
+
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+@section scripts{
+
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+        $(function () {
+            $(".datepicker").datepicker({
+                dateFormat: "dd MM yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-10:+10"
+            });
+
+        });
+
+    </script>
+}

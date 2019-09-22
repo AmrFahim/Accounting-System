@@ -1,0 +1,141 @@
+﻿@model ALFATEX4TRADE.Models.Employee
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Employee</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EmpName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmpName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Department)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Department)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Section)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Section)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Brithday)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Brithday)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Base)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Base)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+      
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AbsenceDays)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AbsenceDays)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Loan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Loan)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PermissionTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PermissionTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PermissiomTimeValue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PermissiomTimeValue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.insurance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.insurance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BuyValue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BuyValue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.penalty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.penalty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PureSalary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PureSalary)
+        </dd>
+
+
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
